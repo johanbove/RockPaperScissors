@@ -1,20 +1,34 @@
-﻿<!DOCTYPE html>  
+﻿<!doctype html>  
 <html lang="en">
-<head> 
+<head>
+<meta charset="utf-8">
 <title>Rock Paper Scissors</title>
 </head>
 <body>
 	<h1>Rock Paper Scissors</h1>
 	<p>Version 0.1</p>
 	<p>Play &quotRock Paper Scissors&quot against the computer!</p>
+	<noscript><p><strong>Tip:</strong> This won't work if you have JavaScript disabled&hellip;</p></noscript>
 	<h2>How to play?</h2>
 	<ol>
 		<li>Click ok in the alert box to start playing, hit cancel if you had enough.</li>
 		<li>Type "rock", "paper" or "scissors"</li>
 		<li>Hit OK!</li>
-	</ol>	
-	<p><strong>Warning:</strong> scores are <em>unfortunately</em> lost when you refresh the page.</p>
-	<noscript>Tip: This won't work if you have JavaScript disabled...</noscript>
+	</ol>
+	<h2>FAQ</h2>
+	<ol>
+<li><em>I keep on losing my scores when I close the page!</em> <br />
+Warning: scores are unfortunately lost when you refresh the page. Next version will use <a href="http://diveintohtml5.info/storage.html">HTML5 local storage</a> to keep track of your score.</li>
+<li><em>I am tired of playing against a machine! Can I play this with my friends?</em> <br />
+Playing against your friends is planned and we'll probably implement this using HTML5 websockets, eg. <a href="http://socket.io/">socket.io</a>, and I'm thinking of a multi-player version as well.</li>
+<li><em>I don't speak English!</em> <br />
+A multi-lingual version is planned using some nifty i18n implementation!</li>
+<li><em>It looks bad and boring!</em> <br />
+Yeah, you're totally right! The plan is to design something prettier to look at as well. Currently using the JS alert boxes seems a little too old-skool. Thinking of applying <a href="http://backbonejs.org/">backbone.js</a> for exactly that purpose!</li>
+<li><em>This is too easy! What about a Rock-Paper-Scissors-Spock-Lizard version?</em> <br />
+Awesome idea! I'm on it, but it'll have to be a different game though... hmm.</li>
+</ol>
+	<!-- The Game -->
 	<script src="rockpaperscissors.js"></script>
 </body>
 </html>
