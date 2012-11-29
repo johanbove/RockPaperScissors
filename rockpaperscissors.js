@@ -34,8 +34,6 @@
 		return myArray;
 	},
 
-		introduction = "Welcome to Rock Paper Scissors!\nHit enter or click \"ok\" to start a new game.",
-	
 		player1Score = 0,
 		player1Streak = 0,
 		player1StreakHigh = 0,
@@ -45,11 +43,53 @@
 		nrGames = 1,
 		tieGames = 0,
 
+		// Default texts in US English
+		txt = {
+			"locale" : "en_US",
+			"choices" : {
+				"rock" : "rock",
+				"paper" : "paper",
+				"scissors" : "scissors"
+			},
+			"welcome" : "Welcome to Rock Paper Scissors!\nHit enter or click \"ok\" to start a new game.",
+			"title" : "Game #{0}",
+			"yourturn" : "Your turn! (Enter rock, paper or scissors)",
+			"tiegames" : "Tiegames: {0}",
+			"introductions" : {
+				"invalidgame" : "Whoops! Please try to enter rock, paper or scissors this time...\n\nPlay again?",
+				"tie" : "Wow, what are the odds of that!\n\nPlay again?",
+				"p1" : "Congratulations winning that game!\nYou're on a roll!\n\nPlay again?",
+				"p2" : "Sorry to see you lose! Best out of three?\n\nPlay again?"
+			},
+			"outcomes" : {
+				"invalidgame" : "Invalid play! Try again!",
+				"tie" : "It's a tie!",
+				"p1" : ":) You WON this game!",
+				"p2" : ":( You LOST this game!"
+			},
+			"player1" : {
+				"played" : "You played: {0} ...",
+				"point" : "Player: {0} point",
+				"points" : "Player: {0} points",
+				"streak" : "Player streak: {0}",
+				"higheststreak" : "Highest streak: {0}"
+			},
+			"player2" : {
+				"played" : "Computer played: {0} ...",
+				"point" : "Computer: {0} point",
+				"points" : "Computer: {0} points",
+				"streak" : "Computer streak: {0}",
+				"higheststreak" : "Highest streak: {0}"
+			}
+		},
+		introduction = txt.welcome,
+
 		/**
 		 * Checks for "malicious" input!
 		 */
 		isValidChoice = function (choice) {
-			return (choice === "rock" || choice === "paper" || choice === "scissors");
+			var choices = txt.choices;
+			return (choice === choices.rock || choice === choices.paper || choice === choices.scissors);
 		},
 
 		/**
@@ -57,7 +97,8 @@
 		 */
 		play = function (choice1, choice2) {
 
-			var game;
+			var game,
+				choices = txt.choices;
 
 			nrGames += 1;
 
@@ -71,7 +112,7 @@
 
 				game = "tie";
 
-			} else if ((choice1 === "rock" && choice2 === "scissors") || (choice1 === "scissors" && choice2 === "paper") || (choice1 === "paper" && choice2 === "rock")) {
+			} else if ((choice1 === choices.rock && choice2 === choices.scissors) || (choice1 === choices.scissors && choice2 === choices.paper) || (choice1 === choices.paper && choice2 === choices.rock)) {
 
 				player1Score += 1;
 				player1Streak += 1;
@@ -104,47 +145,86 @@
 		},
 
 		/**
+		 * Outputs the scores for all players.
+		 */
+		outputScore = function (params) {
+
+			var score = params.score || 0,
+				player = params.player || null,
+				streak = params.streak || 0,
+				highstreak = params.highstreak || 0,
+				output = "";
+
+			// Taking care of plurality
+			output += (score !== 1) ? player.points.replace("{0}", score) + "\n" : player.point.replace("{0}", score) + "\n";
+			output += player.streak.replace("{0}", streak) + "\n";
+			output += player.higheststreak.replace("{0}", highstreak) + "\n";
+
+			return output;
+
+		},
+
+		/**
 		 * Starts a new game.
 		 */
 		run = function () {
 
-			var answers = ["rock", "paper", "scissors"],
-				title = "Game #" + nrGames + "\n\n",
-				answerPlayer1 = w.prompt(title + "Your turn! (Enter rock, paper or scissors)"),
-				answerPlayer2 = fisherYates(answers)[0] || "error",	// Computer is Player2
+			var t_choices = txt.choices,
+				t_introductions = txt.introductions,
+				t_outcomes = txt.outcomes,
+				t_player1 = txt.player1,
+				t_player2 = txt.player2,
+				t_title = txt.title.replace("{0}", nrGames) + "\n\n",
+				// Rock Paper Scissors array
+				posAnswers = [t_choices.rock.toString(), t_choices.paper.toString(), t_choices.scissors.toString()],
+				// Human is Player1
+				answerPlayer1 = w.prompt(t_title + txt.yourturn + "\n"),
+				// Computer is Player2
+				answerPlayer2 = fisherYates(posAnswers)[0] || "error",
 				game = play(answerPlayer1, answerPlayer2),
 				outcome = "",
-				result = "";
+				output = "",
+				answers = "",
+				footer = "",
+				scores = "";
 
-			switch (game) {
-			case "invalidgame":
-				outcome = "Invalid play! Try again!";
-				introduction = "Whoops! Please try to enter rock, paper or scissors this time...\n\nPlay again?";
-				break;
-			case "tie":
-				introduction = "Wow, what are the odds of that!\n\nPlay again?";
-				outcome = "It's a tie!";
-				break;
-			case "p1":
-				introduction = "Congratulations winning that game!\nYou're on a roll!\n\nPlay again?";
-				outcome = "You WON! :)";
-				break;
-			case "p2":
-				introduction = "Sorry to see you lose! Best out of three?\n\nPlay again?";
-				outcome = "You LOST! :(";
-				break;
-			default:
-				outcome = "No play...";
-				break;
+			// Outputs the game results
+			introduction = t_introductions[game];
+			outcome = t_outcomes[game];
+
+			if (answerPlayer1 && answerPlayer2) {
+
+				// Outputs what the players entered,
+				answers += t_player1.played.replace("{0}", answerPlayer1.toUpperCase()) + "\n";
+				answers += t_player2.played.replace("{0}", answerPlayer2.toUpperCase()) + "\n\n";
+
+				// Player 1 score
+				scores += outputScore({
+					"score" : player1Score,
+					"player" : t_player1,
+					"streak" : player1Streak,
+					"highstreak" : player1StreakHigh
+				});
+
+				scores += "\n";
+
+				// Player 2 score
+				scores += outputScore({
+					"score" : player2Score,
+					"player" : t_player2,
+					"streak" : player2Streak,
+					"highstreak" : player2StreakHigh
+				});
+
+				// Some stats...
+				footer += "\n" + txt.tiegames.replace("{0}", tieGames) + "\n";
+
+				// Brings it all together
+				output += t_title + answers + outcome + "\n\n" + scores + footer;
+
+				alert(output);
+
 			}
-
-			result += "You played: " + answerPlayer1.toUpperCase() + "... " + "\n" + "Computer played: " + answerPlayer2.toUpperCase() + "...\n\n";
-			result += outcome + "\n\n";
-			result += "Player: " + player1Score + " points. Streak: " + player1Streak + ". High Streak: " + player1StreakHigh + ".\n";
-			result += "Computer: " + player2Score + " points. Streak: " + player2Streak + ". High Streak: " + player2StreakHigh + ".\n";
-			result += "Tiegames: " + tieGames + "\n";
-
-			alert(title + result);
 
 		};
 
