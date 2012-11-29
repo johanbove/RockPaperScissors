@@ -6,6 +6,8 @@
  *  Inspired by http://www.codecademy.com/courses/javascript-beginner-en-Bthev-mskY8
  *  This program is intended to run inside a browser window.
  * 
+ *  version: 0.2
+ * 
  */
 
 (function (w) {
@@ -181,6 +183,7 @@
 				answerPlayer1 = w.prompt(t_title + txt.yourturn + "\n"),
 				// Computer is Player2
 				answerPlayer2 = fisherYates(posAnswers)[0] || "error",
+				// Introduction and outcomes are set here
 				game = play(answerPlayer1, answerPlayer2),
 				outcome = "",
 				output = "",

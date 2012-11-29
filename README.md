@@ -1,7 +1,7 @@
 Rock Paper Scissors
 ===================
 
-version: 0.1
+version: 0.2
 
 This is a simple game of "Rock Paper Scissors" against the computer.
 
