@@ -26,9 +26,9 @@ FAQ
 1. *I keep on losing my scores when I close the page!*  
 Warning: scores are unfortunately lost when you refresh the page. Next version will use [HTML5 local storage](http://diveintohtml5.info/storage.html) to keep track of your score.
 2. *I am tired of playing against a machine! Can I play this with my friends?*  
-Playing against your friends is planned and we'll probably implement this using HTML5 websockets, eg. [socket.io](http://socket.io/), and I'm thinking of a multi-player version as well.
+Playing against your friends is planned and I'll probably implement this using HTML5 websockets, eg. [socket.io](http://socket.io/), and I'm thinking of a multi-player version as well.
 3. *I don't speak English!*    
-A multi-lingual version is planned using some nifty i18n implementation!
+A multi-lingual version is planned using some nifty _i18n_ implementation!
 4. *It looks bad and boring!*  
 Yeah, you're totally right! The plan is to design something prettier to look at as well. Currently using the JS alert boxes seems a little too old-skool. Thinking of applying [backbone.js](http://backbonejs.org/) for exactly that purpose!
 5. *This is too easy! What about a Rock-Paper-Scissors-Spock-Lizard version?*  
