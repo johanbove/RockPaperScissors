@@ -55,7 +55,8 @@
 			},
 			"welcome" : "Welcome to Rock Paper Scissors!\nHit enter or click \"ok\" to start a new game.",
 			"title" : "Game #{0}",
-			"yourturn" : "Your turn! (Enter rock, paper or scissors)",
+			"yourturn" : "Your turn!",
+			"yourturnfieldhelp" : "Enter rock, paper or scissors...",
 			"tiegames" : "Tiegames: {0}",
 			"introductions" : {
 				"invalidgame" : "Whoops! Please try to enter rock, paper or scissors this time...\n\nPlay again?",
@@ -180,7 +181,7 @@
 				// Rock Paper Scissors array
 				posAnswers = [t_choices.rock.toString(), t_choices.paper.toString(), t_choices.scissors.toString()],
 				// Human is Player1
-				answerPlayer1 = w.prompt(t_title + txt.yourturn + "\n"),
+				answerPlayer1 = w.prompt(t_title + txt.yourturn + "\n", txt.yourturnfieldhelp),
 				// Computer is Player2
 				answerPlayer2 = fisherYates(posAnswers)[0] || "error",
 				// Introduction and outcomes are set here
