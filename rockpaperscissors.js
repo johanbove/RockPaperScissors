@@ -1,15 +1,13 @@
-﻿
-/**
+﻿/**
  *  "Rock Paper Scissors" game in JavaScript
  *  ========================================
  * 
  *  Inspired by http://www.codecademy.com/courses/javascript-beginner-en-Bthev-mskY8
  *  This program is intended to run inside a browser window.
  * 
- *  version: 0.2
+ *  Version: 0.2
  * 
  */
-
 (function (w) {
 
 	"use strict";

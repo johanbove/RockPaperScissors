@@ -3,7 +3,7 @@ Rock Paper Scissors
 
 version: 0.2
 
-This is a simple game of "Rock Paper Scissors" against the computer.
+This is a simple game of "Rock Paper Scissors" against the computer written in JavaScript.
 
 Features
 --------
