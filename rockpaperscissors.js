@@ -5,6 +5,8 @@
  *  Inspired by http://www.codecademy.com/courses/javascript-beginner-en-Bthev-mskY8
  *  This program is intended to run inside a browser window.
  * 
+ *	https://github.com/johanbove/RockPaperScissors
+ * 
  *  Version: 0.2
  * 
  */
